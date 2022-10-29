@@ -1,0 +1,75 @@
+{% extends 'inventory/manager_template/base_template.html' %}
+
+{% block page_title %}
+    View Tools
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">View Tools</h3>
+                        </div>
+                        <!-- /.card-header -->
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Tool Name</th>
+                                    <th>Tool Life</th>
+                                    <th>Purchase Date</th>
+                                    <th>Parts Manufactured</th>
+                                    <th>No of times Polished</th>
+                                    <th>Last Polished on</th>
+                                    <th>Price</th>
+
+                                </tr>
+                                </thead>
+
+                                {% for order in all_tools %}
+                                <tbody>
+                                <tr>
+
+                                    <td>{{ order.tool_name }}</td> 
+                                    <td>{{ order.tool_life }}</td>
+                                    <td>{{ order.bought_on }}</td>
+                                    <td>{{ order.parts_manufactured }}</td>
+                                    <td>{{ order.num_polished }}</td>
+                                    <td>{{ order.last_polished_on }}</td>
+
+                                    <td>{{ order.price }}</td>
+
+                                </tr>
+                                </tbody>
+                                {% endfor %}
+
+                            </table>
+                        </div>
+                    
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+      
+
+  {% endblock main_content %}
+
+  {% comment %} Custom JS to Identify the Reply and Post Reply {% endcomment %}
+
+  {% block custom_js %}
+
+  {% endblock custom_js %}

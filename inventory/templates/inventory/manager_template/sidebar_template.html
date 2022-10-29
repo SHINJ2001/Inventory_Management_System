@@ -1,0 +1,200 @@
+{% load static %}
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="{% url 'manager_home_page' %}" class="brand-link">
+        <span class="brand-text font-weight-light">Company Inventory</span>
+      </a>
+
+      <!-- Sidebar -->
+
+
+      <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="{% static 'dist/img/logo.png' %}" class="img-circle elevation-2 ml-5" alt="User Image" style="max-width:100%;">
+          </div>
+          <div class="info">
+            <a href="{% url 'manager_profile' %}" class="d-block">{{ user.first_name }} {{ user.last_name }}</a>
+          </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+
+            <li class="nav-item">
+              {% url 'manager_home_page' as manager_home %}
+              <a href="{{ manager_home }}" class="nav-link {% if request.path == manager_home %} active {% endif %}">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Home
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'manager_new_customer' as  manager_new_customer %}
+              <a href="{{ manager_new_customer }}" class="nav-link {% if request.path == manager_new_customer %} active {% endif %} ">
+                <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                <p>
+                  Add new customers
+                </p>
+              </a>
+            </li>
+            
+            <li class="nav-item">
+              {% url 'manager_add_rejections' as manager_add_rejections %}
+              <a href="{{ manager_add_rejections }}" class="nav-link {% if request.path == manager_add_rejections %} active {% endif %}">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Add Rejections
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'manager_view_orders' as manager_view_orders %}
+              <a href="{{ manager_view_orders }}" class="nav-link {% if request.path ==  manager_view_orders  %} active {% endif %}" >
+                <i class="nav-icon fas fa-user-graduate"></i>
+                <p>
+                  View Orders
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'manager_view_tools' as manager_view_tools %}
+              <a href="{{ manager_view_tools }}" class="nav-link {% if request.path == manager_view_tools %} active {% endif %} ">
+                <i class="nav-icon fas fa-chalkboard"></i>
+                <p>
+                  View Tools
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+            {% url 'manager_update_production_today' as manager_update_production_today %}
+              <a href="{{ manager_update_production_today }}" class="nav-link {% if request.path == manager_update_production_today %} active {% endif %}">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Update Production Today
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'manager_view_rejections' as manager_view_rejections %}
+              <a href="{{ manager_view_rejections }}" class="nav-link {% if request.path == manager_view_rejections %} active {% endif %}">
+                <i class="nav-icon fas fa-book"></i>
+                <p>
+                  View Rejections
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'manager_view_operations' as manager_view_operations %}
+              <a href="{{ manager_view_operations }}" class="nav-link {% if request.path == manager_view_operations %} active {% endif %}">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  View Operations
+                </p>
+              </a>
+            </li>
+
+
+            <li class="nav-item">
+              {% url 'manager_add_parts' as manager_add_parts %}
+              <a href="{{ manager_add_parts }}" class="nav-link {% if request.path == manager_add_parts %} active {% endif %} ">
+                <i class="nav-icon fas fa-graduation-cap"></i>
+                <p>
+                  Add parts
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'manager_get_production_today' as manager_get_production_today %}
+              <a href="{{ manager_get_production_today }}" class="nav-link {% if request.path == manager_get_production_today %} active {% endif %}">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Get Production 
+                </p>
+              </a>
+            </li>
+
+
+            <li class="nav-item">
+              {% url 'manager_view_productions' as manager_view_productions %}
+              <a href="{{ manager_view_productions }}" class="nav-link {% if request.path == manager_view_productions %} active {% endif %}">
+                <i class="nav-icon fas fa-calendar-alt"></i>
+                <p>
+                  View Targets 
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'manager_view_parts' as manager_view_parts %}
+              <a href="{{ manager_view_parts }}" class="nav-link {% if request.path == manager_view_parts %} active {% endif %}">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  View Parts
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              {% url 'manager_add_tools' as  manager_add_tools %}
+              <a href="{{ manager_add_tools }}" class="nav-link {% if request.path == manager_add_tools %} active {% endif %} ">
+                <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                <p>
+                  Add new tools
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              {% url 'manager_update_tools' as  manager_update_tools %}
+              <a href="{{ manager_update_tools }}" class="nav-link {% if request.path == manager_update_tools %} active {% endif %} ">
+                <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                <p>
+                  Update tools
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              {% url 'manager_change_price' as  manager_change_price %}
+              <a href="{{ manager_change_price }}" class="nav-link {% if request.path == manager_change_price %} active {% endif %} ">
+                <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                <p>
+                  Update Price
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              {% url 'change_rejection_status' as  change_rejection_status %}
+              <a href="{{ change_rejection_status }}" class="nav-link {% if request.path == change_rejection_status %} active {% endif %} ">
+                <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                <p>
+                  Change Rejection Status
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              {% url 'manager_update_lead' as  manager_update_lead %}
+              <a href="{{ manager_update_lead }}" class="nav-link {% if request.path == manager_update_lead %} active {% endif %} ">
+                <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                <p>
+                  Add leads
+                </p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>

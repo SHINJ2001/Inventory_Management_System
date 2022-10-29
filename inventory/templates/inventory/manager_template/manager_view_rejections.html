@@ -1,0 +1,71 @@
+{% extends 'inventory/manager_template/base_template.html' %}
+
+{% block page_title %}
+    View Rejections
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">View Rejections</h3>
+                        </div>
+                        <!-- /.card-header -->
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Order Id</th>
+                                    <th>Rejection Date</th>
+                                    <th>Quantity</th>
+                                    <th>Operation Required</th>
+                                    <th>Operation Status</th>
+
+
+                                </tr>
+                                </thead>
+
+                                {% for order in rejections_pending %}
+                                <tbody>
+                                <tr>
+
+                                    <td>{{ order.order_id }}</td> 
+                                    <td>{{ order.rejection_date }}</td>
+                                    <td>{{ order.rejection_amount }}</td>
+                                    <td>{{ order.operations_required }}</td>
+                                    <td>{{ order.operation_status }}</td>
+
+                                </tr>
+                                </tbody>
+                                {% endfor %}
+
+                            </table>
+                        </div>
+                    
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+      
+
+  {% endblock main_content %}
+
+  {% comment %} Custom JS to Identify the Reply and Post Reply {% endcomment %}
+
+  {% block custom_js %}
+
+  {% endblock custom_js %}

@@ -1,0 +1,92 @@
+{% extends 'inventory/manager_template/base_template.html' %}
+
+{% block page_title %}
+    Add Rejection
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Add Rejection</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" method="POST" action="{% url 'manager_add_rejections_save' %}">
+                        {% csrf_token %}
+
+                        
+                                {% comment %} Display Messages {% endcomment %}
+                                {% if messages %}
+                                <div class="form-group">
+                                <div class="col-12">
+                                    {% for message in messages %}
+                                    {% if message.tags == "error" %}
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% elif message.tags == "success" %}
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                </div>
+                                {% endif %}
+                            
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Order Id </label>
+                                <input type="text" class="form-control" name="Order_id" placeholder="order id">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Rejection date</label>
+                                    
+                                    <input type="text" class="form-control" name="Rejection_date" placeholder="(YYYY-MM-DD)">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Quantity </label>
+                                    
+                                    <input type="text" class="form-control" name="Rejection_amount" placeholder="Enter quantity">
+                            </div>
+
+                            <div class="form-group">
+                                <label> Operation Required </label>
+                                    <input type="text" class="form-control" name="Operations_required" placeholder="Enter operation requested">
+                            </div>
+
+                        <td>
+                            <a href="{% url 'change_rejection_status' %}" class="btn btn-success">Change Status</a>
+                            </td>
+                        <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Add Rejection</button>
+                        </div>
+                    </form>
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+  {% endblock main_content %}
