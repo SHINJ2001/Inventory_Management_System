@@ -17,19 +17,13 @@ class CustomUser(AbstractUser):
 
 #Tools required for manufactring the tool
 class tools(models.Model):
-	tool_name = models.CharField(max_length=40)
+	tool_name = models.CharField(max_length=40, primary_key = True)
 	tool_life = models.IntegerField()
 	bought_on = models.DateField(default = datetime.today())
 	parts_manufactured = models.IntegerField(null=True)
 	num_polished = models.IntegerField(null=True)
 	last_polished_on = models.DateField(null=True)
 	price = models.CharField(max_length = 8)
-
-	class Meta:
-		constraints=[
-		models.UniqueConstraint(fields=['bought_on', 'tool_name' ], 
-			name = 'prim_key_for_tools')
-		]
 
 #Arrange these in increasing quantity so that every number would 
 #denote the step number completed
@@ -59,7 +53,7 @@ class Operations(models.Model):
 #Data to be maintained to check the productivity of the company
 class manufacturers(models.Model):
 	lead = models.CharField(max_length=50, primary_key = True)
-	lead_contact = models.IntegerField(null=True)
+	lead_contact = models.CharField(max_length = 12, null=True)
 	lead_email = models.CharField(max_length = 150, null=True)
 
 class requirement(models.Model):

@@ -1,7 +1,7 @@
 {% extends 'inventory/manager_template/base_template.html' %}
 
 {% block page_title %}
-    Delete Part
+    Add Operations
 {% endblock page_title %}
 
 {% block main_content %}
@@ -16,11 +16,11 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Delete Part</h3>
+                        <h3 class="card-title">Add Operations</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" method="POST" action="{% url 'manager_delete_parts_save' %}">
+                    <form role="form" method="POST" action="{% url 'manager_add_operations_save' %}">
                         {% csrf_token %}
 
                         
@@ -52,13 +52,18 @@
 
                         <div class="card-body">
                             <div class="form-group">
-                                <label> Part Name </label>
-                                <input type="text" class="form-control" name="part_name" placeholder="Enter part name ">
+                                <label>Operation Name </label>
+                                <input type="text" class="form-control" name="operation_name" placeholder="Enter operation name">
                             </div>
 
+                            <div class="form-group">
+                                <label>Tool Name </label>
+                                    <input type="text" class="form-control" name="tool_required" placeholder="Enter tool required">
+                    
+                            </div>
                             
                         <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Update parts</button>
+                        <button type="submit" class="btn btn-primary">Add Operation</button>
                         </div>
                     </form>
                     </div>

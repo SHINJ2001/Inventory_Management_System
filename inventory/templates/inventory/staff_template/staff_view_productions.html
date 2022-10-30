@@ -1,0 +1,71 @@
+{% extends 'inventory/staff_template/base_template.html' %}
+
+{% block page_title %}
+    View Production
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">View Production</h3>
+                        </div>
+                        <!-- /.card-header -->
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Lead Name</th>
+                                    <th>Quantity</th>
+                                    <th>Date</th>
+                                    <th>Current Average</th>
+                                    <th>Expected Average</th>
+    
+                                </tr>
+                                </thead>
+
+                                {% for order in production %}
+                                <tbody>
+                                <tr>
+                                    <td>{{ order.order_id }}</td>
+                                    <td>{{ order.operation_lead }}</td>
+                                    <td>{{ order.production }}</td> 
+                                    <td>{{ order.date_of_production }}</td>
+                                    <td>{{ order.current_average }}</td>
+                                    <td>{{ order.expected_average }}</td>
+                                
+                                </tr>
+                                </tbody>
+                                {% endfor %}
+
+                            </table>
+                        </div>
+                    
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+      
+
+  {% endblock main_content %}
+
+  {% comment %} Custom JS to Identify the Reply and Post Reply {% endcomment %}
+
+  {% block custom_js %}
+
+  {% endblock custom_js %}

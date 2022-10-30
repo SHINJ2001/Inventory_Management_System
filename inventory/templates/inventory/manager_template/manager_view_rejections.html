@@ -29,7 +29,7 @@
                                     <th>Quantity</th>
                                     <th>Operation Required</th>
                                     <th>Operation Status</th>
-
+                                    <th>Action</th>
 
                                 </tr>
                                 </thead>
@@ -43,9 +43,13 @@
                                     <td>{{ order.rejection_amount }}</td>
                                     <td>{{ order.operations_required }}</td>
                                     <td>{{ order.operation_status }}</td>
-
+                                    <td>
+                                        <a href="{% url 'manager_delete_rejections' order.order_id order.operations_required %}" class="btn btn-danger">Delete</a> 
+                                        <a href="{% url 'change_rejection_status_save' order.order_id order.operations_required %}" class="btn btn-success">Change Status</a> 
+                                  </td>
                                 </tr>
-                                </tbody>
+                                </tbody>                                        <a href=""
+
                                 {% endfor %}
 
                             </table>

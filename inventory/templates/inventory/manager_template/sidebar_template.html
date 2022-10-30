@@ -118,17 +118,6 @@
             </li>
 
             <li class="nav-item">
-              {% url 'manager_get_production_today' as manager_get_production_today %}
-              <a href="{{ manager_get_production_today }}" class="nav-link {% if request.path == manager_get_production_today %} active {% endif %}">
-                <i class="nav-icon fas fa-th"></i>
-                <p>
-                  Get Production 
-                </p>
-              </a>
-            </li>
-
-
-            <li class="nav-item">
               {% url 'manager_view_productions' as manager_view_productions %}
               <a href="{{ manager_view_productions }}" class="nav-link {% if request.path == manager_view_productions %} active {% endif %}">
                 <i class="nav-icon fas fa-calendar-alt"></i>
@@ -157,32 +146,15 @@
               </a>
             </li>
             <li class="nav-item">
-              {% url 'manager_update_tools' as  manager_update_tools %}
-              <a href="{{ manager_update_tools }}" class="nav-link {% if request.path == manager_update_tools %} active {% endif %} ">
+              {% url 'manager_add_operations' as  manager_add_operations %}
+              <a href="{{ manager_add_operations }}" class="nav-link {% if request.path == manager_add_operations %} active {% endif %} ">
                 <i class="nav-icon fas fa-chalkboard-teacher"></i>
                 <p>
-                  Update tools
+                  Add Operation
                 </p>
               </a>
             </li>
-            <li class="nav-item">
-              {% url 'manager_change_price' as  manager_change_price %}
-              <a href="{{ manager_change_price }}" class="nav-link {% if request.path == manager_change_price %} active {% endif %} ">
-                <i class="nav-icon fas fa-chalkboard-teacher"></i>
-                <p>
-                  Update Price
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              {% url 'change_rejection_status' as  change_rejection_status %}
-              <a href="{{ change_rejection_status }}" class="nav-link {% if request.path == change_rejection_status %} active {% endif %} ">
-                <i class="nav-icon fas fa-chalkboard-teacher"></i>
-                <p>
-                  Change Rejection Status
-                </p>
-              </a>
-            </li>
+
             <li class="nav-item">
               {% url 'manager_update_lead' as  manager_update_lead %}
               <a href="{{ manager_update_lead }}" class="nav-link {% if request.path == manager_update_lead %} active {% endif %} ">

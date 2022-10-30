@@ -121,6 +121,16 @@ def manager_add_rejections_save(request):
             messages.error(request, "Failed to Add Rejection!")
             return redirect('manager_add_rejections')
 
+def manager_delete_rejections(request, order, op_req):
+	rejection = rejections.objects.get(order_id=order, operations_required = op_req)
+	try:
+		rejection.delete()
+		messages.success(request, "Staff Deleted Successfully.")
+		return redirect('manager_view_rejections')
+	except:
+		messages.error(request, "Failed to Delete Staff.")
+		return redirect('manager_view_rejections')
+ 
 def manager_add_tools(request):
 	tools_all = tools.objects.all()
 	context = {
@@ -204,7 +214,7 @@ def manager_view_productions(request):
 		"production" : production
 	}
 
-	return render(request, "inventory/manager_template/manager_view_productions.html", context)
+	return render(request, "inventory/manager_template/manager_get_production_on.html", context)
 
 def manager_view_parts(request):
 	all_parts = parts.objects.all().distinct()
@@ -258,9 +268,10 @@ def manager_add_part_save(request):
 
 def manager_get_production_on(request):
 	production = completed_processes.objects.all()
-
+	target = targets.objects.all()
 	context = {
-		"production" : production
+		"production" : production,
+		"target" : target
 	}
 
 	return render(request, "inventory/manager_template/manager_get_production_on.html", context)
@@ -280,7 +291,7 @@ def manager_update_production_today_save(request):
 	else:
 		Order_id =  request.POST.get('order_id')
 		Operation_lead = request.POST.get('operation_lead')
-
+		
 	require = requirement.objects.get(order_id = Order_id)
 	x = require.deadline
 	days = datetime.today() - x
@@ -362,48 +373,28 @@ def manager_change_price_save(request):
 			messages.error(request, "Failed to Update Price.")
 			return HttpResponseRedirect(reverse("manager_change_price",
                                                 kwargs={"price":part_price}))
-
-def manager_delete_parts(request):
-	part = parts.objects.all()
-	context = {
-		"part" : part
-	}
-
-	return render(request, "inventory/manager_template/manager_delete_parts.html", context)
-
-def manager_delete_parts_save(request):
-	Part_name = request.POST.get('part_name')
-	part = parts.objects.get(part_name = Part_name)
+def manager_delete_parts_save(request, par):
+	part = parts.objects.get(part_name = par)
 	try:
 		part.delete()
 		messages.success(request, "Part Deleted Successfully.")
-		return redirect('manager_delete_parts')
+		return redirect('manager_view_parts')
 	except:
 		messages.error(request, "Failed to Delete Part.")
-		return redirect('manager_delete_parts')
+		return redirect('manager_view_parts')
 
-def change_rejection_status(request):
-	rejections_pending = rejections.objects.all()
-	context = {
-		"rejections_pending":rejections_pending
-	}
-
-	return render(request, "inventory/manager_template/change_rejection_status.html", context)
-
-def change_rejection_status_save(request):
-	Order_id = request.POST.get('order_id')
-	Operations_required = request.POST.get('op_req')
+def change_rejection_status_save(request, order, op_req):
 	try:
-			order = rejections.objects.get(order_id = Order_id, operations_required = Operations_required)
+			order = rejections.objects.get(order_id = order, operations_required = op_req)
 			order.operation_status = '1'
 			order.save()
 			messages.success(request, "Updated Successfully.")
-			return HttpResponseRedirect(reverse("change_rejection_status",
-                                                kwargs={"order_id":Order_id, "operations_required":Operations_required}))
+			return HttpResponseRedirect(reverse("manager_view_rejections",
+                                                kwargs={"order_id":order, "operations_required":op_req}))
 	except:
 			messages.error(request, "Failed to Update.")
 			return HttpResponseRedirect(reverse("change_rejection_status",
-                                                kwargs={"order_id":Order_id, "operations_required":Operations_required}))
+                                                kwargs={"order_id":order, "operations_required":op_req}))
 
 
 def manager_update_lead(request):
@@ -417,7 +408,7 @@ def manager_update_lead(request):
 def  manager_update_lead_save(request):
 	if request.method != "POST":
 		messages.error(request, "Method Not Allowed!")
-		return redirect('manager_add_part_save')
+		return redirect('manager_home_page')
 	else:
 		lead_name = request.POST.get('lead')
 		Lead_contact = request.POST.get('lead_contact')
@@ -427,7 +418,57 @@ def  manager_update_lead_save(request):
 		manufac = manufacturers(lead = lead_name, lead_contact = Lead_contact, lead_email = Lead_email)
 		manufac.save()
 		messages.success(request, "Lead Added Successfully!")
-		return redirect('manager_home')
+		return redirect('manager_home_page')
 	except:
             messages.error(request, "Failed to Add Lead!")
-            return redirect('manager_home')
+            return redirect('manager_home_page')
+
+def manager_add_operations(request):
+	op = Operations.objects.all()
+	context = {
+		"op":op
+	}
+
+	return render(request, "inventory/manager_template/manager_add_operations.html", context)
+
+def manager_add_operations_save(request):
+	if request.method != "POST":
+		messages.error(request, "Method Not Allowed!")
+		return redirect('manager_add_operations')
+	else:
+		operations = request.POST.get('operation_name')
+		tool_requi = request.POST.get('tool_required')
+		tool_req = tools.objects.get(tool_name = tool_requi)
+		oper = { 
+			"Procuring Raw Material" : "1", 
+	 "Cleaning" : "2",
+	 "Heating" : "3",
+	 "Shaping" : "4",
+	 "Cooling" : "5", 
+	 "Cutting" : "6",
+	 "Resting" : "7",
+	 "Polishing" : "8",
+	 "Packing" : "9"
+		}
+		x = oper[operations]
+	try:
+		operation = Operations(operation_name = x, tool_name = tool_req)
+		operation.save()
+		messages.success(request, "Operation Added Successfully!")
+		return redirect('manager_add_operations')
+	except Exception as e:
+			print(e)
+			messages.error(request, "Failed to Add Operation!")
+			return redirect('manager_add_operations')
+
+def change_status(request, order):
+	ord = requirement.objects.get(order_id = order)
+
+	try:
+		ord.acceptance_status = '1'
+		ord.save()
+		messages.success(request, "status changed Successfully!")
+		return redirect('manager_view_orders')
+	except:
+		messages.error(request, "Failed to change status!")
+		return redirect('manager_view_orders')

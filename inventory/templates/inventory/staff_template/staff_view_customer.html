@@ -1,0 +1,77 @@
+{% extends 'inventory/staff_template/base_template.html' %}
+
+{% block page_title %}
+    View Orders
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">View Orders</h3>
+                        </div>
+                        <!-- /.card-header -->
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer Name</th>
+                                    <th>Part Name</th>
+                                    <th>Quantity</th>
+                                    <th>Order Date</th>
+                                    <th>Date Of Transport</th>
+                                    <th>Deadline</th>
+                                    <th>Customer Email</th>
+                                    <th>Customer Contact</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+
+                                {% for order in customer %}
+                                <tbody>
+                                <tr>
+                                    <td>{{ order.order_id }}</td>
+                                    <td>{{ order.customer_name }}</td>
+                                    <td>{{ order.part_name }}</td> 
+                                    <td>{{ order.quantity }}</td>
+                                    <td>{{ order.order_date }}</td>
+                                    <td>{{ order.date_of_transport }}</td>
+                                    <td>{{ order.deadline }}</td>
+                                    <td>{{ order.customer_email }}</td>
+                                    <td>{{ order.customer_phone1 }}</td>
+
+                                </tr>
+                                </tbody>
+                                {% endfor %}
+
+                            </table>
+                        </div>
+                    
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+      
+
+  {% endblock main_content %}
+
+  {% comment %} Custom JS to Identify the Reply and Post Reply {% endcomment %}
+
+  {% block custom_js %}
+
+  {% endblock custom_js %}

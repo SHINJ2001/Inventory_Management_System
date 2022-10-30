@@ -33,7 +33,7 @@ def doLogin(request):
     if user.user_type == CustomUser.MANAGER:
         return redirect('manager_home/')
     elif user.user_type == CustomUser.STAFF:
-        return redirect('staff_home/')
+        return redirect('staff_home_page/')
 
     return render(request, 'inventory/home.html')
  

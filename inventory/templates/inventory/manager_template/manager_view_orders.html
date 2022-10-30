@@ -33,7 +33,7 @@
                                     <th>Deadline</th>
                                     <th>Customer Email</th>
                                     <th>Customer Contact</th>
-
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
 
@@ -49,7 +49,9 @@
                                     <td>{{ order.deadline }}</td>
                                     <td>{{ order.customer_email }}</td>
                                     <td>{{ order.customer_phone1 }}</td>
-                                    
+<td>
+    <a href="{% url 'change_status' customer.order_id %}" class="btn btn-danger">Change Status</a>
+</td>
                                 </tr>
                                 </tbody>
                                 {% endfor %}

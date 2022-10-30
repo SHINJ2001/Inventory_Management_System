@@ -26,6 +26,7 @@
                                 <tr>
                                     <th>Part Name</th>
                                     <th>Price</th>
+                                    <th>Action</th>
 
                                 </tr>
                                 </thead>
@@ -36,6 +37,9 @@
 
                                     <td>{{ order.part_name }}</td> 
                                     <td>{{ order.price }}</td>
+                                    <td>
+                                        <a href="{% url 'manager_delete_parts_save' order.part_name %}" class="btn btn-danger">Delete</a>                  
+                                    </td>
                                 </tr>
                                 </tbody>
                                 {% endfor %}
