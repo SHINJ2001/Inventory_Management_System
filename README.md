@@ -37,3 +37,5 @@ Quit the server with CONTROL-C.
 
 Now open the link shown containing the IP address of the host machine.
 The application provides a user friendly interface. Create required users and start using it like any other web application!
+
+P.S. You might want to change the MYSQL settings in Incentory\_Management/settings.py -> DATABASES section to configure the application for the databse on your machine. Change the username, password and the name of the database which would be the name assigned by you to your database.
